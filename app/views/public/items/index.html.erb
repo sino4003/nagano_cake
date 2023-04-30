@@ -1,0 +1,30 @@
+<div class="container my-5">
+
+  <div class="row">
+    <h3 class="border rounded shadow-sm font-weight-bold px-3">商品一覧</h3>
+  </div>
+
+  <div class="row mt-5">
+    <div class="row">
+      <% @items.each do |item| %>
+        <div class="col-3 mt-3">
+          <%= link_to item_path(item) do %>
+            <%= image_tag item.get_image, size: "190x150" %><br>
+          <% end %>
+          <%= item.name %><br>
+          ¥<%= item.price %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="container">
+  	<div class="row">
+  	 <div class="col-md-4 offset-md-4 py-2 mt-5">
+  	 	<%= paginate @items %>
+  	 </div>
+  	</div>
+   </div>
+ </div>
+
+
+

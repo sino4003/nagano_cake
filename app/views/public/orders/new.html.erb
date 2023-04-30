@@ -1,0 +1,61 @@
+<div class="container my-5">
+  
+  <div class="row">
+    <div class="offset-1">
+      <%= flash[:order_new] %>
+      <h3 class="border rounded shadow-sm font-weight-bold px-3">購入情報入力</h3>
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="offset-1 col-5">
+      <%= form_with model: @order, url:orders_confirm_path do |f| %>
+        <div class="row">
+          <strong class="red-border px-3">お支払い方法</strong>
+        </div>
+        <div class="form-check mt-3">
+          <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+          <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+          <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+          <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
+        </div>
+        <div class="row mt-5">
+          <strong class="red-border px-3">お届け先</strong>
+        </div>
+        <div class="form-check mt-3">
+          <%= f.radio_button :select_address, Order.select_addresses.key(0) %>
+          <%= f.label :select_address_my_address, Order.select_addresses_i18n[:my_address] %>
+          <br>
+        〒<%= current_customer.postal_code %>
+          <%= current_customer.address %>
+          <%= current_customer.full_name %>
+        </div>
+        <div class="form-check mt-5">
+          <%= f.radio_button :select_address, Order.select_addresses.key(1) %>
+          <%= f.label :select_address_registered_address, Order.select_addresses_i18n[:registered_address] %>
+          <br>
+          <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display) %>
+        </div>
+        <div class="form-check mt-5">
+          <%= f.radio_button :select_address, Order.select_addresses.key(2) %>
+          <%= f.label :select_address_new_address, Order.select_addresses_i18n[:new_address] %>
+          <div class="form-group row mt-3">
+            <p>郵便番号</p>
+            <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control offset-1 ml-auto" %>
+          </div>
+          <div class="form-group row mt-3">
+            <p>住所</p>
+            <%= f.text_field :address, placeholder: "東京都新宿区新宿1-1-1",class: "form-control offset-1 ml-auto" %>
+          </div>
+          <div class="form-group row mt-3">
+            <p>宛名</p>
+            <%= f.text_field :name, placeholder: "令和太郎",class: "form-control offset-1 ml-auto" %>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <%= f.submit '確認画面へ進む',class: "btn btn-outline-primary ml-auto mb-5" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

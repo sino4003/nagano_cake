@@ -1,0 +1,1 @@
+RAILS_ENV=3.1.2 environment is not defined in config/webpacker.yml, falling back to production environment

@@ -1,30 +1,47 @@
-<div class="container my-5">
-
+<!--<div class="container py-5">-->
+<!--  <div class="row mt-5">-->
+<!--    <div class="col-md-3">-->
+<div class="container p-5">
+  <p>
+    <h2>商品一覧</h2>
+    (全<%= @items.count %>件)
+  </p>
   <div class="row">
-    <h3 class="border rounded shadow-sm font-weight-bold px-3">商品一覧</h3>
-  </div>
-
-  <div class="row mt-5">
-    <div class="row">
+    <!--<div class="d-flex flex-wrap">-->
       <% @items.each do |item| %>
-        <div class="col-3 mt-3">
-          <%= link_to item_path(item) do %>
-            <%= image_tag item.get_image, size: "190x150" %><br>
-          <% end %>
-          <%= item.name %><br>
-          ¥<%= item.price %>
+        <div class="col-md-3">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.image, size: "200x160" %>
+                  <% end %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= item.name %></td>
+              </tr>
+              <tr>
+                <td>￥<%= item.price.to_s(:delimited) %></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       <% end %>
+    <!--</div>-->
+    <div class="col-md-3"></div>
+  </div>
+
+    <div class="row p-3">
+      <div class="col-md-6 offset-md-3 py-2">
+        <div class="text-center">
+          <%= paginate @items %>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="container">
-  	<div class="row">
-  	 <div class="col-md-4 offset-md-4 py-2 mt-5">
-  	 	<%= paginate @items %>
-  	 </div>
-  	</div>
-   </div>
- </div>
-
-
-
+</div>
+<!--</div>-->

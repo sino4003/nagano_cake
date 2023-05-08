@@ -38,7 +38,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class="row mt-5">
     <div class="col-6">
       <div class="row mt-3">
@@ -59,7 +59,7 @@
                 <td><%= order_detail.item.with_tax_price %></td>
                 <td><%= order_detail.amount %></td>
                 <td><%= order_detail.subtotal %></td>
-                <td><%= form_with model: order_detail, url:admin_order_detail_path, method: :PATCH do |f| %>
+                <td><%= form_with model: order_detail, url:admin_order_detail_path(order_detail), method: :PATCH do |f| %>
                     <%= f.select :making_status, [['製作不可'], ['製作待ち'], ['製作中'], ['製作完了']] %>
                     <%= f.submit '変更', class: "btn btn-success"%>
                   <% end %>

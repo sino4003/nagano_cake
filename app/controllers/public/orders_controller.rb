@@ -39,7 +39,7 @@ class Public::OrdersController < ApplicationController
       @order_detail.amount = cart_item.amount
       @order_detail.price = (cart_item.item.price*1.1).floor
       @order_detail.order_id =  @order.id
-      @order_detail.making_status = "製作待ち"
+      #@order_detail.making_status = "製作待ち"
       @order_detail.save
     end
     current_customer.cart_items.destroy_all
